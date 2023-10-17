@@ -1,6 +1,7 @@
 -------------------------------------------
--- @Author: 		S.McGough
+-- @Author: 		  S.McGough
 -- @Descriptiion:	Abfrage von Kunden 
+-- @FILE:         FirstScript.sql
 --------------------------------------------
 
 SELECT * FROM KUNDEN k;
