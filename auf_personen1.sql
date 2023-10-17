@@ -77,13 +77,14 @@ WHERE (
     and (
         10 - Extract (
             MONTH
-            FROM GEBURTSTAG
+            FROM
+                GEBURTSTAG
         ) = 0
     );
 
 -- Liste aller Personen über 50, die einen Toyota Celica fahren nach Alter absteigend sortiert
-SELECT
-   *
+
+SELECT *
 FROM Kunden
 WHERE
     fahrzeug Like '%Toyota Celica%'
@@ -93,8 +94,31 @@ WHERE
     ) > 50;
 
 -- Liste aller Frauen aus NRW mit Blutgruppe A+ und aller Männer aus NRW mit Blutgruppe A-, zuerst die Frauen, dann die Männer
-SELECT * FROM Kunden where (geschlecht = 'w') or (geschlecht = 'w')
+
+SELECT *
+FROM Kunden
+where
+    bundesland = 'Nordrhein-Westfalen'
+    and ( (
+            geschlecht = 'w'
+            and BLUTGRUPPE = 'A+'
+        )
+        or (
+            geschlecht = 'm'
+            and BLUTGRUPPE = 'A-'
+        )
+    )
 
 -- Eigene Datenabfrage (1)
 
+SELECT *
+FROM Kunden
+WHERE (beruf LIKE '%tech%')
+    AND (
+        geschlecht = 'm'
+        OR geschlecht = 'w'
+    );
+
 -- Eigene Datenabfrage (2)
+
+SELECT * FROM Kunden WHERE vorname LIKE '%d' ORDER BY geburtstag ASC
