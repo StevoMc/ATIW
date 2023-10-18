@@ -8,117 +8,134 @@
 
 --------------------------------------------
 
-SELECT * FROM KUNDEN;
+SELECT
+    *
+FROM
+    KUNDEN;
 
 -- Eine Liste mit Name, Vorname, Postleitzahl, Ort , Strasse mit Hausnummer aller Personen aus Soest (PLZ 59494)
 
-SELECT nachname, vorname, plz, stadt , strassenr FROM Kunden;
+SELECT
+    NACHNAME,
+    VORNAME,
+    PLZ,
+    STADT,
+    STRASSENR
+FROM
+    KUNDEN;
 
 -- In welcher Stadt wohnt Lukas Meier?
 
-SELECT stadt
-FROM kunden
+SELECT
+    STADT
+FROM
+    KUNDEN
 WHERE
-    vorname = 'Lukas'
-    and nachname = 'Meier';
+    VORNAME = 'Lukas'
+    AND NACHNAME = 'Meier';
 
 -- Ich brauche: alle Zahnärzte (Dentist) der Datenbank
 
-SELECT * FROM Kunden where beruf = 'Dentist';
+SELECT
+    *
+FROM
+    KUNDEN
+WHERE
+    BERUF = 'Dentist';
 
 -- aus dem PLZ-Gebiet 2....
 
-SELECT * FROM Kunden where plz LIKE '2%';
+SELECT
+    *
+FROM
+    KUNDEN
+WHERE
+    PLZ LIKE '2%';
 
 -- alle Lehrer und Lehrerinnen mit der Berufsbezeichnung aus der Datenbank sortiert nach beruf
 
-SELECT * FROM Kunden where beruf LIKE '%teacher%';
+SELECT
+    *
+FROM
+    KUNDEN
+WHERE
+    BERUF LIKE '%teacher%';
 
 -- nur die Lehrerinnen, die an einer Schule unterrichten
 
-SELECT *
-FROM Kunden
-where
-    beruf LIKE '%teacher%'
-    and (
-        beruf LIKE '%school%'
-        or beruf LIKE '%School%'
-    )
-    and geschlecht = 'w';
+SELECT
+    *
+FROM
+    KUNDEN
+WHERE
+    BERUF LIKE '%teacher%'
+    AND ( BERUF LIKE '%school%'
+    OR BERUF LIKE '%School%' )
+    AND GESCHLECHT = 'w';
 
 -- eine Liste der Namen und Geburtsdaten aller unter 30 Jährigen aus München?
 
 SELECT
-    vorname,
-    nachname,
-    geburtstag
-FROM Kunden
+    VORNAME,
+    NACHNAME,
+    GEBURTSTAG
+FROM
+    KUNDEN
 WHERE
-    Stadt = 'München'
-    and 2023 - Extract (
-        YEAR
-        FROM GEBURTSTAG
-    ) < 30;
+    STADT = 'München'
+    AND 2023 - EXTRACT ( YEAR FROM GEBURTSTAG ) < 30;
 
 -- Welche personen haben heute Geburtstag?
 
 SELECT
-    vorname,
-    nachname,
-    geburtstag
-FROM Kunden
-WHERE (
-        17 - Extract (
-            DAY
-            FROM
-                GEBURTSTAG
-        ) = 0
-    )
-    and (
-        10 - Extract (
-            MONTH
-            FROM
-                GEBURTSTAG
-        ) = 0
-    );
+    VORNAME,
+    NACHNAME,
+    GEBURTSTAG
+FROM
+    KUNDEN
+WHERE
+    ( 17 - EXTRACT ( DAY FROM GEBURTSTAG ) = 0 )
+    AND ( 10 - EXTRACT ( MONTH FROM GEBURTSTAG ) = 0 );
 
 -- Liste aller Personen über 50, die einen Toyota Celica fahren nach Alter absteigend sortiert
 
-SELECT *
-FROM Kunden
+SELECT
+    *
+FROM
+    KUNDEN
 WHERE
-    fahrzeug Like '%Toyota Celica%'
-    and 2023 - Extract (
-        YEAR
-        FROM GEBURTSTAG
-    ) > 50;
+    FAHRZEUG LIKE '%Toyota Celica%'
+    AND 2023 - EXTRACT ( YEAR FROM GEBURTSTAG ) > 50;
 
 -- Liste aller Frauen aus NRW mit Blutgruppe A+ und aller Männer aus NRW mit Blutgruppe A-, zuerst die Frauen, dann die Männer
 
-SELECT *
-FROM Kunden
-where
-    bundesland = 'Nordrhein-Westfalen'
-    and ( (
-            geschlecht = 'w'
-            and BLUTGRUPPE = 'A+'
-        )
-        or (
-            geschlecht = 'm'
-            and BLUTGRUPPE = 'A-'
-        )
-    )
-
--- Eigene Datenabfrage (1)
-
-SELECT *
-FROM Kunden
-WHERE (beruf LIKE '%tech%')
-    AND (
-        geschlecht = 'm'
-        OR geschlecht = 'w'
-    );
+SELECT
+    *
+FROM
+    KUNDEN
+WHERE
+    BUNDESLAND = 'Nordrhein-Westfalen'
+    AND ( ( GESCHLECHT = 'w'
+    AND BLUTGRUPPE = 'A+' )
+    OR ( GESCHLECHT = 'm'
+    AND BLUTGRUPPE = 'A-' ) )
+ -- Eigene Datenabfrage (1)
+    SELECT
+        *
+    FROM
+        KUNDEN
+    WHERE
+        (BERUF LIKE '%tech%')
+        AND ( GESCHLECHT = 'm'
+        OR GESCHLECHT = 'w' );
 
 -- Eigene Datenabfrage (2)
 
-SELECT * FROM Kunden WHERE id LIKE '%1' ORDER BY geburtstag ASC
+SELECT
+    *
+FROM
+    KUNDEN
+WHERE
+    ID LIKE '%1'
+ORDER BY
+    GEBURTSTAG ASC
