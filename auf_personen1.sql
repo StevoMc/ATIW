@@ -121,4 +121,4 @@ WHERE (beruf LIKE '%tech%')
 
 -- Eigene Datenabfrage (2)
 
-SELECT * FROM Kunden WHERE vorname LIKE '%d' ORDER BY geburtstag ASC
+SELECT * FROM Kunden WHERE id LIKE '%1' ORDER BY geburtstag ASC
