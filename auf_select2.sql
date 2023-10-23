@@ -160,4 +160,14 @@ WHERE
 GROUP BY
   FAHRZEUG, FIRMA, GESCHLECHT, VORNAME, NACHNAME
 ORDER BY
-  ANZAHL DESC
+  ANZAHL DESC;
+
+/*
+This SQL statement selects all the records from the table "Kunden" where the "GEBURTSTAG" column matches the current date and the "FIRMA" column is not null. This will display all the people who have their birthday today and work in a company.
+*/
+SELECT
+  *
+FROM
+  KUNDEN
+WHERE
+  EXTRACT(DAY FROM GEBURTSTAG) = EXTRACT(DAY FROM SYSDATE)
