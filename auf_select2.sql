@@ -136,7 +136,9 @@ SELECT
 , VORNAME
 , COUNT(*) AS ANZAHL
 FROM
-  KUNDEN K GROUP BYNACHNAME
+  KUNDEN K
+GROUP BY
+  NACHNAME
 , VORNAME
 HAVING
   COUNT(*) > 1
@@ -162,7 +164,6 @@ GROUP BY
 ORDER BY
   ANZAHL DESC;
 
-
 /*
 This query selects all columns from the KUNDEN table where the day of the month of the GEBURTSTAG (birthday) column is equal to the day of the month of the current date (SYSDATE).
 */
@@ -171,4 +172,4 @@ SELECT
 FROM
   KUNDEN
 WHERE
-  EXTRACT(DAY FROM GEBURTSTAG) = EXTRACT(DAY FROM SYSDATE)
+  EXTRACT(DAY FROM GEBURTSTAG) = EXTRACT(DAY FROM SYSDATE);
