@@ -162,8 +162,9 @@ GROUP BY
 ORDER BY
   ANZAHL DESC;
 
+
 /*
-This SQL statement selects all the records from the table "Kunden" where the "GEBURTSTAG" column matches the current date and the "FIRMA" column is not null. This will display all the people who have their birthday today and work in a company.
+This query selects all columns from the KUNDEN table where the day of the month of the GEBURTSTAG (birthday) column is equal to the day of the month of the current date (SYSDATE).
 */
 SELECT
   *
