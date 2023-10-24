@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Kursverwaltung
 {
@@ -10,64 +11,17 @@ namespace Kursverwaltung
         private int dauer;
         private double gebuehr;
         private bool ausgebucht = false;
+        private List<Raum> raeume;
+
 
         public Kurs()
         {
             Console.WriteLine("Kursdaten eintragen:");
-            bool fertig = false;
-            while (!fertig)
-            {
-                try
-                {
-                    Console.Write("KursNummer\t> ");
-                    string kursNummer = Console.ReadLine();
-                    if (kursNummer == null) { continue; }
-                    setKursNummer(kursNummer);
-                }
-                catch
-                {
-                    throw new Exception("[KURS]: kursnummer error");
-                }
-
-                try
-                {
-                    Console.Write("Bezeichnung\t> ");
-                    string bezeichnung = Console.ReadLine();
-                    if (bezeichnung == null) { continue; }
-                    setBezeichnung(bezeichnung);
-                }
-                catch
-                {
-                    throw new Exception("[KURS]: bezeichnung error");
-                }
-
-                try
-                {
-                    Console.Write("Dauer\t> ");
-                    int dauer = Convert.ToInt32(Console.ReadLine());
-                    if (dauer < 0) { continue; }
-                    setDauer(dauer);
-                }
-                catch
-                {
-                    throw new Exception("[KURS]: dauer error");
-                }
-
-                try
-                {
-                    Console.Write("Gebuehr\t> ");
-                    double gebuehr = Convert.ToDouble(Console.ReadLine());
-                    if (gebuehr < 0) { continue; };
-                    setGebuehr(gebuehr);
-                }
-                catch
-                {
-                    throw new Exception("[KURS]: gebuehr error");
-                }
-
-                fertig = true;
-
-            }
+            setInteractiveRaum();
+            setInteractiveKursNummer();
+            setInteractiveBezeichnung();
+            setInteractiveDauer();
+            setInteractiveGebuehr();
         }
 
 
@@ -78,6 +32,94 @@ namespace Kursverwaltung
             this.dauer = dauer;
             this.gebuehr = gebuehr;
         }
+
+        private void setInteractiveBezeichnung()
+        {
+            Console.Write("Bezeichnung\t> ");
+            string bezeichnung = Console.ReadLine();
+            if (bezeichnung != null) { setBezeichnung(bezeichnung); }
+
+            else
+            {
+                setInteractiveBezeichnung();
+            }
+        }
+
+        private void setInteractiveKursNummer()
+        {
+            Console.Write("KursNummer\t> ");
+            string kursNummer = Console.ReadLine();
+            if (kursNummer != null) { setKursNummer(kursNummer); }
+            else
+            {
+                Console.Write("Invalid input");
+                setInteractiveKursNummer();
+            }
+        }
+
+        private void setInteractiveDauer()
+        {
+            Console.Write("Dauer\t> ");
+            try
+            {
+
+                int dauer = Convert.ToInt32(Console.ReadLine());
+                if (dauer > 0) { setDauer(dauer); }
+                else
+                {
+                    Console.Write("Invalid input");
+                    setInteractiveDauer();
+                }
+            }
+            catch
+            {
+                setInteractiveDauer();
+            }
+
+        }
+
+        private void setInteractiveGebuehr()
+        {
+            Console.Write("Gebuehr\t> ");
+            try
+            {
+                double gebuehr = Convert.ToDouble(Console.ReadLine());
+                if (gebuehr >= 0) { setGebuehr(gebuehr); }
+
+                else
+                {
+                    Console.Write("Invalid input");
+                    setInteractiveGebuehr();
+                }
+            }
+            catch
+            {
+                setInteractiveGebuehr();
+            }
+        }
+
+        private void setInteractiveRaum()
+        {
+            Console.Write("Raum\t> [nr, gr, p]");
+            try
+            {
+                string[] raum = Console.ReadLine().Split(",");
+                Raeume(raum[0])
+
+                if (raum >= 0) { setGebuehr(gebuehr); }
+
+                else
+                {
+                    Console.Write("Invalid input");
+                    setInteractiveRaum();
+                }
+            }
+            catch
+            {
+                setInteractiveRaum();
+            }
+        }
+
 
         public override string ToString()
         {
@@ -140,6 +182,9 @@ namespace Kursverwaltung
         {
             this.ausgebucht = ausgebucht;
         }
+
+
+        internal List<Raum> Raeume { get => raeume; set => raeume = value; }
 
         public bool getAusgebucht()
         {
