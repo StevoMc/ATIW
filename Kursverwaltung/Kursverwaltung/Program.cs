@@ -1,4 +1,6 @@
-﻿namespace Kursverwaltung
+﻿using System.Text.RegularExpressions;
+
+namespace Kursverwaltung
 {
     /// <summary>
     /// Program: Kursverwaltung
@@ -45,6 +47,11 @@
             k?.GetRaume();
 
             Console.WriteLine(kursliste.ToString());
+
+
+            var nr = Regex.Match("FS223", @"^(?'mail'\w{1,6})");
+            Console.WriteLine(nr.Groups["mail"]);
+
         }
     }
 }
