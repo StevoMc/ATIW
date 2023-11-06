@@ -16,6 +16,17 @@ namespace Fahrzeuge
 
         public string Besitzer { get => this.besitzer; set => besitzer = value; }
 
+        public override bool Equals(object? obj)
+        {
+            return obj is Fahrzeuge fahrzeuge &&
+                   Besitzer == fahrzeuge.Besitzer;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Besitzer);
+        }
+
         public override string ToString()
         {
             return $"Besitzer: {Besitzer}";
@@ -25,5 +36,7 @@ namespace Fahrzeuge
         {
             return $"Besitzer: {besitzer}";
         }
+
+
     }
 }
