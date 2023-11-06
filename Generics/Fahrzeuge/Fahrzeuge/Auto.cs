@@ -10,18 +10,12 @@ namespace Fahrzeuge
     {
         private string? kennzeichen;
 
-
-        public Auto()
-        {
-            Kennzeichen = "WM SM 2001";
-        }
-
-        public Auto(string kennzeichen) => Kennzeichen = kennzeichen;
+        public Auto(string kennzeichen, string besitzer): base(besitzer) => Kennzeichen = kennzeichen;
 
         public override string ToString()
         {
             string className = this.GetType().Name.ToUpper();
-            return $"[{className}] {Kennzeichen}";
+            return $"[{className}] {Kennzeichen} : {Besitzer}";
         }
 
         public string Kennzeichen { get => kennzeichen ?? ""; set => kennzeichen = value; }
