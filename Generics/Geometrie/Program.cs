@@ -4,28 +4,37 @@
     {
         static void Main(string[] args)
         {
-            List<Figur> figuren = new();
-
-            Figur kreis5 = new Kreis((2.5, 2.5), 5, "rot");
-            Figur kreis4 = new Kreis((2, 2), 4, "gelb");
-
-            Figur rechteck3 = new Rechteck((1.5, 2), (3, 4), "blau");
-            Figur rechteck4 = new Rechteck((2, 1.5), (4, 3), "schwarz");
-            Figur rechteck2 = new Rechteck((1, 3), (2, 6), "gruen");
-
-            figuren.Add(kreis5);
-            figuren.Add(kreis4);
-            figuren.Add(rechteck3);
-            figuren.Add(rechteck4);
-            figuren.Add(rechteck2);
-
-            figuren.ForEach(f =>
+            List<Figur> figuren = new()
             {
-                Console.WriteLine(f);
-            });
+                // Figur( mitte, seiten|radius, farbe)
+                new Kreis((2.5, 2.5), 5, "rot"),
+                new Kreis((2, 2), 4, "gelb"),
+                new Rechteck((1.5, 2), (3, 4), "blau"),
+                new Rechteck((2, 1.5), (4, 3), "schwarz"),
+                new Rechteck((1, 3), (2, 6), "gruen"),
+                new Rechteck((1, 3), (2, 6), "gruen")
+            };
 
+            figuren.ForEach(f => Console.WriteLine(f));
+            FindDuplicates(figuren);
+            figuren.ForEach(f => Console.WriteLine(f));
 
-            Console.WriteLine(rechteck3.Equals(rechteck4));
+        }
+
+        static void FindDuplicates(List<Figur> figuren)
+        {
+            figuren.ForEach(a => figuren.ForEach(b =>
+            {
+                if (a == b) return;
+                if (a.Equals(b))
+                {
+                    Console.WriteLine("[WARN] Duplicate Object found!");
+                    Console.WriteLine(a);
+                    Console.WriteLine(b);
+                    Console.WriteLine("");
+                }
+            }));
+
         }
     }
 }

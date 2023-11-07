@@ -17,10 +17,16 @@ namespace Geometrie
 
         public double Radius { get => _radius; set => _radius = value; }
 
+        public override string ToString()
+        {
+            return $"[KREIS]:\t Radius:{Radius} Mitte:{Mitte} Farbe:{Farbe}";
+        }
+
         public override bool Equals(object? obj)
         {
             return obj is Kreis kreis &&
-                   Radius == kreis.Radius;
+                   Radius == kreis.Radius && Farbe == kreis.Farbe;
+
         }
 
         public override int GetHashCode()
