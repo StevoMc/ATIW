@@ -1,1 +1,1 @@
-{"resources":{"Scripts/auf_erdBibeinfach.sql":{"default-datasource":"oracle_thin-18b38054b85-696b52d1f82ea70e","default-schema":"FS223_SMCGOUGH"},"aufgabeNM.sql":{"default-datasource":"oracle_thin-18b38054b85-696b52d1f82ea70e","default-schema":"FS223_SMCGOUGH"}}}
+{"resources":{"aufgabeNM.sql":{"default-schema":"FS223_SMCGOUGH","default-datasource":"oracle_thin-18b38054b85-696b52d1f82ea70e"}}}
